@@ -647,35 +647,67 @@
       opacity: 1;
       animation: pulse 0.5s ease;
     }
-    /* Cheat Panel Styles */
+    /* Cheat Panel Styles - Subtle Design */
     #cheatPanel {
       position: fixed;
-      bottom: 5px;
-      left: 5px;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
       z-index: 9999;
       display: none;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.9);
       color: white;
-      padding: 10px;
-      border-radius: 5px;
-      max-width: 300px;
-      font-size: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 14px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+      max-height: 70vh;
+      overflow-y: auto;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
+    
     #cheatButton {
       position: fixed;
-      bottom: 10px;
-      left: 10px;
-      width: 10px;
-      height: 10px;
-      background: transparent;
-      border: none;
+      bottom: 20px;
+      left: 20px;
+      width: 24px;
+      height: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
       cursor: pointer;
       z-index: 9998;
+      transition: all 0.3s ease;
     }
+    
     #cheatButton:hover {
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.2);
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+    
+    #cheatButton:active {
+      transform: scale(0.9);
+    }
+    
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      #cheatPanel {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 10px;
+        max-height: 60vh;
+      }
+      
+      #cheatButton {
+        bottom: 10px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+      }
     }
   </style>
 </head>
@@ -915,9 +947,9 @@
   
   <!-- Cheat Panel -->
   <div id="cheatPanel">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-      <strong>CHEAT MODE</strong>
-      <button onclick="toggleCheatPanel()" style="background: none; border: none; color: white; cursor: pointer;">✕</button>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+      <strong style="font-size: 16px;">🎮 GAME INFO</strong>
+      <button onclick="toggleCheatPanel()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">✕</button>
     </div>
     <div id="cheatInfo"></div>
   </div>
@@ -2392,13 +2424,20 @@
       
       if (cheatPanel.style.display === 'none' || !cheatPanel.style.display) {
         // Show cheat info
-        let infoHTML = `<div><strong>Secret Word:</strong> ${gameState.currentWord}</div>`;
-        infoHTML += `<div><strong>Category:</strong> ${gameState.currentCategory}</div>`;
-        infoHTML += '<div style="margin-top: 10px;"><strong>Player Roles:</strong></div>';
+        let infoHTML = `<div style="margin-bottom: 10px;"><strong>🔤 Secret Word:</strong> <span style="color: #4ecdc4; font-weight: bold;">${gameState.currentWord}</span></div>`;
+        infoHTML += `<div style="margin-bottom: 15px;"><strong>📂 Category:</strong> <span style="color: #ff6b6b; font-weight: bold;">${gameState.currentCategory}</span></div>`;
+        infoHTML += '<div style="margin-bottom: 10px; font-weight: bold;">👥 Player Roles:</div>';
         
         gameState.players.forEach(player => {
           const roleData = roles[player.role];
-          infoHTML += `<div>Player ${player.id}: ${roleData.name} ${!player.alive ? '(Eliminated)' : ''}</div>`;
+          const statusIcon = player.alive ? '✅' : '💀';
+          const roleColor = player.role === 'imposter' || player.role === 'shapeshifter' || player.role === 'silencer' ||
+                          player.role === 'hinter' || player.role === 'saboteur' ? '#ff6b6b' : '#4ecdc4';
+          
+          infoHTML += `<div style="margin-bottom: 5px; padding: 5px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+            ${statusIcon} <strong>Player ${player.id}:</strong> 
+            <span style="color: ${roleColor}; font-weight: bold;">${roleData.name}</span>
+          </div>`;
         });
         
         cheatInfo.innerHTML = infoHTML;
