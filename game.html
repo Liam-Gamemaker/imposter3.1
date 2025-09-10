@@ -13,7 +13,7 @@
     }
     :root {
       --primary-color: #4c51bf;
-      --secondary-color: #667eea;
+      --secondary-color: #339af0; /* Changed from #667eea to more readable blue */
       --accent-color: #764ba2;
       --success-color: #2ecc71;
       --danger-color: #e74c3c;
@@ -647,68 +647,6 @@
       opacity: 1;
       animation: pulse 0.5s ease;
     }
-    /* Cheat Panel Styles - Subtle Design */
-    #cheatPanel {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      z-index: 9999;
-      display: none;
-      background: rgba(0,0,0,0.9);
-      color: white;
-      padding: 15px;
-      border-radius: 15px;
-      font-size: 14px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-      max-height: 70vh;
-      overflow-y: auto;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    #cheatButton {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 24px;
-      height: 24px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 9998;
-      transition: all 0.3s ease;
-    }
-    
-    #cheatButton:hover {
-      background: rgba(255,255,255,0.15);
-      transform: scale(1.2);
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    }
-    
-    #cheatButton:active {
-      transform: scale(0.9);
-    }
-    
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-      #cheatPanel {
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-        font-size: 12px;
-        padding: 10px;
-        max-height: 60vh;
-      }
-      
-      #cheatButton {
-        bottom: 10px;
-        left: 10px;
-        width: 20px;
-        height: 20px;
-      }
-    }
   </style>
 </head>
 <body class="dark-mode">
@@ -944,19 +882,6 @@
   <div id="notificationContainer"></div>
   <!-- Sound Visualizer -->
   <div id="soundVisualizer" class="sound-visualizer">🔊</div>
-  
-  <!-- Cheat Panel -->
-  <div id="cheatPanel">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
-      <strong style="font-size: 16px;">🎮 GAME INFO</strong>
-      <button onclick="toggleCheatPanel()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">✕</button>
-    </div>
-    <div id="cheatInfo"></div>
-  </div>
-  
-  <!-- Cheat Button -->
-  <div id="cheatButton" onclick="toggleCheatPanel()"></div>
-  
   <script>
     // Game State Variables
     let gameState = {
@@ -1018,185 +943,288 @@
     // Default to easy
     let currentWordCategories = easyWordCategories;
     
-    // Word hints
+    // Word hints - less obvious and more broad
     const wordHints = {
       // Animals
-      "Whale": "Largest mammal in the ocean",
-      "Pelican": "Bird with a large throat pouch",
-      "Emu": "Large flightless Australian bird",
-      "Lion": "King of the jungle",
-      "Wolf": "Wild canine that howls at the moon",
-      "Shark": "Predator of the sea with sharp teeth",
-      "Bee": "Insect that makes honey",
+      "Whale": "Large marine mammal",
+      "Pelican": "Bird with a distinctive beak pouch",
+      "Emu": "Flightless bird from Australia",
+      "Lion": "Large wild cat with a mane",
+      "Wolf": "Wild canine that lives in packs",
+      "Shark": "Ocean predator with cartilage skeleton",
+      "Bee": "Insect that produces sweet substances",
       "Bunny": "Small mammal with long ears",
       "Cat": "Domestic feline pet",
-      "Bird": "Flying animal with feathers",
-      "Kangaroo": "Australian marsupial that hops",
-      "Fish": "Aquatic animal with gills and fins",
-      "Dog": "Man's best friend",
+      "Bird": "Flying vertebrate with feathers",
+      "Kangaroo": "Marsupial that hops",
+      "Fish": "Aquatic vertebrate with gills",
+      "Dog": "Domestic canine companion",
       "Coyote": "Wild canine found in North America",
-      "Hyena": "African carnivore known for laughing sound",
-      "Otter": "Semi-aquatic mammal that uses tools",
-      "Bobcat": "North American wild cat",
-      "Dodo Bird": "Extinct flightless bird from Mauritius",
+      "Hyena": "African carnivore with a distinctive call",
+      "Otter": "Semi-aquatic mammal known for playfulness",
+      "Bobcat": "North American wild feline",
+      "Dodo Bird": "Extinct flightless bird from an island",
       
       // Fruits
-      "Plum": "Small purple stone fruit",
+      "Plum": "Small stone fruit with purple skin",
       "Apricot": "Small orange stone fruit",
-      "Mango": "Tropical stone fruit with orange flesh",
-      "Apple": "Red or green fruit that keeps doctors away",
-      "Pear": "Bell-shaped fruit",
-      "Watermelon": "Large green fruit with red flesh",
-      "Passionfruit": "Tropical fruit with pulpy seeds",
+      "Mango": "Tropical fruit with orange flesh",
+      "Apple": "Common round fruit",
+      "Pear": "Bell-shaped fruit with juicy flesh",
+      "Watermelon": "Large green fruit with watery red flesh",
+      "Passionfruit": "Tropical fruit with pulpy interior",
       "Banana": "Yellow curved fruit",
-      "Grape": "Small fruit that grows in bunches",
-      "Pineapple": "Tropical fruit with a spiky crown",
-      "Orange": "Citrus fruit that shares its name with a color",
-      "Strawberry": "Red berry with seeds on the outside",
+      "Grape": "Small fruit that grows in clusters",
+      "Pineapple": "Tropical fruit with a crown",
+      "Orange": "Citrus fruit",
+      "Strawberry": "Red berry with seeds on outside",
       "Rasberry": "Red composite berry",
-      "Dragonfruit": "Exotic fruit with pink skin and white flesh",
+      "Dragonfruit": "Exotic fruit with striking appearance",
       
       // Jobs
-      "Teacher": "Educates students in a classroom",
-      "Garbage Man": "Collects trash and waste",
-      "Singer": "Performs vocal music",
-      "Dancer": "Performs dance routines",
-      "Scientist": "Conducts research and experiments",
-      "FireFighter": "Emergency responder who fights fires",
-      "Bus Driver": "Drives a bus",
-      "Dentist": "Treats teeth and oral health",
-      "Doctor": "Medical professional who treats patients",
-      "Vet": "Animal doctor",
-      "Artist": "Creates visual or performance art",
-      "Chef": "Professional cook in a restaurant",
-      "Animator": "Creates animated films or graphics",
-      "Construction Worker": "Builds structures",
-      "Photographer": "Takes professional photographs",
-      "Logistician": "Manages supply chains and distribution",
-      "Plumber": "Works with pipes and water systems",
-      "Tax Auditor": "Examines financial records",
-      "President": "Leader of a country",
+      "Teacher": "Educator in a learning environment",
+      "Garbage Man": "Worker who collects waste",
+      "Singer": "Vocal performer",
+      "Dancer": "Performer who expresses through movement",
+      "Scientist": "Researcher in a field of study",
+      "FireFighter": "Emergency responder for fires",
+      "Bus Driver": "Operator of a large road vehicle",
+      "Dentist": "Professional who treats oral health",
+      "Doctor": "Medical practitioner",
+      "Vet": "Animal healthcare provider",
+      "Artist": "Creator of visual or performance works",
+      "Chef": "Professional cook",
+      "Animator": "Creator of moving images",
+      "Construction Worker": "Builder of structures",
+      "Photographer": "Creator of images using a camera",
+      "Logistician": "Manager of supply chains",
+      "Plumber": "Worker who deals with water systems",
+      "Tax Auditor": "Financial records examiner",
+      "President": "Leader of a nation",
       
       // Songs
-      "Baby Shark": "Children's song about a family of sharks",
-      "Twinkle Twinkle": "Nursery rhyme about a star",
-      "Happy Birthday": "Song sung on birthdays",
-      "Wheels on the Bus": "Children's song about bus parts",
-      "Let it go": "Disney song about embracing freedom",
-      "Last Christmas": "Song about a past holiday heartbreak",
+      "Baby Shark": "Children's song about sea creatures",
+      "Twinkle Twinkle": "Nursery rhyme about celestial bodies",
+      "Happy Birthday": "Song for celebrating birth anniversaries",
+      "Wheels on the Bus": "Children's song about transportation",
+      "Let it go": "Song about releasing inhibitions",
+      "Last Christmas": "Song about a past holiday relationship",
       "This Old Man": "Children's counting song",
-      "Happy": "Upbeat song about feeling joyful",
-      "Old MacDonald": "Children's song about a farm",
-      "Friday": "Song about the end of the workweek",
+      "Happy": "Song about positive emotions",
+      "Old MacDonald": "Children's song about farm animals",
+      "Friday": "Song about the end of the work week",
       "Hockey Pokey": "Children's dance song",
-      "Jingle Bells": "Christmas song about sleigh riding",
+      "Jingle Bells": "Winter holiday song",
       "Shake it off": "Song about ignoring negativity",
-      "Baby": "Love song by Justin Bieber",
-      "Not like us": "Hip-hop diss track",
-      "Despacito": "Spanish-language hit song",
+      "Baby": "Song about romantic affection",
+      "Not like us": "Song about differences",
+      "Despacito": "Popular Spanish-language song",
       "Shape of you": "Song about physical attraction",
-      "Uptown Funk": "Funk song about style",
-      "Payphone": "Song about trying to reach someone",
-      "Hello": "Song about reconnecting with an ex",
-      "Dream on": "Rock song about pursuing dreams",
+      "Uptown Funk": "Upbeat song about style",
+      "Payphone": "Song about trying to reconnect",
+      "Hello": "Song about reaching out",
+      "Dream on": "Song about aspirations",
       "Gods Plan": "Song about destiny",
-      "Stiches": "Song about heartbreak pain",
+      "Stiches": "Song about emotional pain",
       "Drivers License": "Song about driving and heartbreak",
-      "Thriller": "Halloween-themed song by Michael Jackson",
+      "Thriller": "Song with spooky elements",
       
       // Instruments
-      "Guitar": "Six-stringed instrument played by strumming",
+      "Guitar": "String instrument with frets",
       "Violin": "String instrument played with a bow",
       "Piano": "Instrument with black and white keys",
-      "Cowbell": "Percussion instrument shaped like a bell",
-      "Microphone": "Device used to amplify sound",
-      "Flute": "Woodwind instrument played by blowing",
-      "Drums": "Percussion instrument played with sticks",
-      "Recorder": "Small woodwind instrument",
-      "Keyboard": "Electronic instrument with piano-style keys",
-      "Harmonica": "Small mouth-blown instrument",
-      "Ukulele": "Small four-stringed instrument from Hawaii",
-      "Didgeridoo": "Long wooden wind instrument from Australia",
-      "The Triangle": "Percussion instrument in the shape of a triangle",
-      "Kick Drum": "Large drum played with a foot pedal",
+      "Cowbell": "Percussion instrument from a farm animal",
+      "Microphone": "Device that amplifies sound",
+      "Flute": "Woodwind instrument",
+      "Drums": "Percussion instrument",
+      "Recorder": "Small wind instrument",
+      "Keyboard": "Electronic instrument with keys",
+      "Harmonica": "Small mouth-blown reed instrument",
+      "Ukulele": "Small four-stringed instrument",
+      "Didgeridoo": "Long wooden wind instrument",
+      "The Triangle": "Three-sided percussion instrument",
+      "Kick Drum": "Large drum operated by foot",
       "Accordion": "Instrument with bellows and keys",
       
       // Super Heroes
-      "Superman": "Man of steel who can fly",
-      "Batman": "Caped crusader with no superpowers",
-      "Catwoman": "Feline-themed antihero",
-      "Spiderman": "Web-slinging hero with spider powers",
-      "Hulk": "Green hero with incredible strength",
-      "Iron Man": "Genius billionaire in a powered suit",
-      "Wonder-Woman": "Amazonian princess with super strength",
-      "Wolverine": "Mutant with retractable claws",
-      "Mario": "Plumber who saves Princess Peach",
-      "Moana": "Polynesian princess who sails the ocean",
-      "Elastigirl": "Hero who can stretch her body",
-      "Elsa": "Snow queen with ice powers",
+      "Superman": "Hero with super strength and flight",
+      "Batman": "Hero without superpowers",
+      "Catwoman": "Feline-themed character",
+      "Spiderman": "Hero with spider-like abilities",
+      "Hulk": "Hero with incredible strength",
+      "Iron Man": "Hero in a powered suit",
+      "Wonder-Woman": "Amazonian princess hero",
+      "Wolverine": "Hero with healing abilities",
+      "Mario": "Plumber hero in video games",
+      "Moana": "Polynesian heroine",
+      "Elastigirl": "Hero with stretching abilities",
+      "Elsa": "Hero with ice powers",
       
       // Movies
-      "Toy Story": "Animated film about toys that come to life",
-      "Frozen": "Disney film about two royal sisters",
-      "Moana": "Disney film about a Polynesian girl",
-      "Cinderalla": "Classic fairy tale about a girl and a glass slipper",
-      "Snow White": "Classic fairy tale about a princess and seven dwarfs",
-      "Incredibles": "Animated film about a family of superheroes",
-      "Cars": "Animated film about talking race cars",
-      "Up": "Animated film about a man who flies his house",
-      "Kung fu Panda": "Animated film about a panda who learns kung fu",
-      "Rio": "Animated film about a blue macaw",
-      "Inside Out": "Animated film about emotions inside a girl's head",
-      "Big Hero 6": "Animated film about a boy and his robot friend",
-      "Shawshank Redemption": "Film about hope and friendship in prison",
-      "Daddy's Home": "Comedy about stepdads",
-      "End Game": "Superhero film about the final battle",
-      "Titanic": "Romance film about a doomed ship",
-      "Charlotte's Web": "Film about a spider who saves a pig",
-      "Fast and Furious": "Action film about street racing",
-      "BIG": "Comedy about a boy who becomes an adult overnight",
+      "Toy Story": "Film about toys coming to life",
+      "Frozen": "Film about two royal sisters",
+      "Moana": "Film about a Polynesian journey",
+      "Cinderalla": "Film about a mistreated girl",
+      "Snow White": "Film about a princess and dwarfs",
+      "Incredibles": "Film about a superhero family",
+      "Cars": "Film about talking vehicles",
+      "Up": "Film about a flying house",
+      "Kung fu Panda": "Film about a martial arts animal",
+      "Rio": "Film about a tropical bird",
+      "Inside Out": "Film about personified emotions",
+      "Big Hero 6": "Film about a boy and his robot",
+      "Shawshank Redemption": "Film about hope in prison",
+      "Daddy's Home": "Comedy about stepfamilies",
+      "End Game": "Superhero conclusion film",
+      "Titanic": "Film about a famous ship disaster",
+      "Charlotte's Web": "Film about a friendship between animals",
+      "Fast and Furious": "Film about street racing",
+      "BIG": "Film about a child in an adult body",
       
       // Parts of body
-      "Nose": "Facial feature used for smelling",
-      "Eye": "Organ used for seeing",
-      "Leg": "Lower limb used for walking",
+      "Nose": "Facial feature for smelling",
+      "Eye": "Organ for vision",
+      "Leg": "Lower limb for walking",
       "Arm": "Upper limb with hands",
-      "Hand": "Body part with fingers",
+      "Hand": "Body part with digits",
       "Foot": "Lower body part with toes",
-      "Head": "Top part of the body containing the brain",
-      "Ear": "Organ used for hearing",
-      "Mouth": "Facial feature used for eating and speaking",
+      "Head": "Top part of the body",
+      "Ear": "Organ for hearing",
+      "Mouth": "Facial feature for eating",
       "Back": "Rear part of the torso",
-      "Hair": "Grows on the head",
+      "Hair": "Grows on the scalp",
       "Fingers": "Digits on the hand",
-      "Teeth": "Used for chewing food",
+      "Teeth": "Used for chewing",
       "Toes": "Digits on the foot",
-      "Brain": "Organ in the head that controls the body",
+      "Brain": "Organ in the head",
       "Heart": "Organ that pumps blood",
       
       // Pets
-      "Dog": "Man's best friend",
-      "Cat": "Domestic feline pet",
-      "Fish": "Aquatic pet that swims in a tank",
+      "Dog": "Common domestic canine",
+      "Cat": "Common domestic feline",
+      "Fish": "Aquatic pet",
       "Rabbit": "Small mammal with long ears",
-      "Hamster": "Small rodent often kept in a cage",
-      "Bird": "Feathered pet that can fly",
+      "Hamster": "Small rodent pet",
+      "Bird": "Feathered pet",
       "Turtle": "Reptile with a shell",
-      "Guinea Pig": "Small rodent from South America",
-      "Frog": "Amphibian known for jumping",
-      "Lizard": "Reptile with scaly skin",
+      "Guinea Pig": "Small rodent pet",
+      "Frog": "Amphibian pet",
+      "Lizard": "Reptile pet",
       
       // Clothing
-      "Shirt": "Garment worn on the upper body",
-      "Pants": "Garment worn on the lower body",
+      "Shirt": "Upper body garment",
+      "Pants": "Lower body garment",
       "Hat": "Head covering",
-      "Jacket": "Outer garment worn for warmth",
-      "Socks": "Coverings for the feet",
+      "Jacket": "Outerwear garment",
+      "Socks": "Foot coverings",
       "Shoes": "Footwear",
-      "Gloves": "Coverings for the hands",
+      "Gloves": "Hand coverings",
       "Scarf": "Neck covering",
-      "Dress": "One-piece garment for women",
-      "Shorts": "Short trousers"
+      "Dress": "One-piece garment",
+      "Shorts": "Short trousers",
+      
+      // Countries
+      "Slovenia": "European country",
+      "Moldova": "Eastern European country",
+      "Bhutan": "Himalayan country",
+      "New Zealand": "Island country in Pacific",
+      "USA": "North American country",
+      "Argentina": "South American country",
+      "Mexico": "North American country",
+      "Brazil": "South American country",
+      "Comoros": "Island nation in Indian Ocean",
+      "France": "Western European country",
+      "Germany": "Central European country",
+      "Canada": "North American country",
+      
+      // Famous People
+      "Michael Jackson": "King of Pop",
+      "Timothee Chalamet": "Young American actor",
+      "Ariana Grande": "American pop singer",
+      "Lebron James": "Basketball player",
+      "Chris Pratt": "American actor",
+      "Jim Carrey": "Canadian comedian actor",
+      "Chris Rock": "American comedian",
+      "Elon Musk": "Technology entrepreneur",
+      "The Rock": "Wrestler turned actor",
+      "John Cena": "Wrestler and actor",
+      "Martin Luther King": "Civil rights leader",
+      "Kanye West": "Rapper and designer",
+      
+      // Video Games
+      "Fortnite": "Battle royale game",
+      "Minecraft": "Block-building game",
+      "Call of Duty": "First-person shooter game",
+      "Tertis": "Block-stacking puzzle game",
+      "Among Us": "Social deduction game",
+      "Halo": "Sci-fi shooter game",
+      "Fall Guys": "Obstacle course game",
+      "Fifa": "Soccer simulation game",
+      "NBA 2K": "Basketball simulation game",
+      "Pac-Man": "Classic arcade game",
+      
+      // Athletes
+      "Luka Doncic": "Basketball player",
+      "Steph Curry": "Basketball player",
+      "Klay Thompson": "Basketball player",
+      "Tiger Woods": "Golfer",
+      "Ronaldo": "Soccer player",
+      "Kawhi Leonard": "Basketball player",
+      "Messi": "Soccer player",
+      "Travis Kelce": "Football player",
+      "Kylian Mbappe": "Soccer player",
+      "Caitlin Clark": "Basketball player",
+      "Angel Reese": "Basketball player",
+      "Rory Mcilroy": "Golfer",
+      
+      // Foods
+      "Spaghetti Bolognese": "Italian pasta dish",
+      "Taco": "Mexican dish",
+      "Risotto": "Italian rice dish",
+      "Steak": "Cooked meat",
+      "Jelly": "Fruit spread",
+      "Jollof Rice": "West African rice dish",
+      "Egg Fried Rice": "Asian rice dish",
+      "Sushi": "Japanese rice dish",
+      "Pork": "Meat from pigs",
+      "Ribs": "Meat dish",
+      "Ratatouille": "French vegetable dish",
+      "Chicken Noodle Soup": "Soup dish",
+      "Massaman Beef Curry": "Thai curry dish",
+      
+      // Brands
+      "Nike": "Sportswear company",
+      "Team 10": "Social media group",
+      "Vans": "Shoe company",
+      "Reebok": "Sportswear company",
+      "Fifa": "Soccer organization",
+      "Google": "Technology company",
+      "Apple": "Technology company",
+      "Adidas": "Sportswear company",
+      "Victoria's Secret": "Lingerie brand",
+      "McDonald's": "Fast food chain",
+      "Faze": "Esports organization",
+      "Hype House": "Social media collective",
+      "Bop House": "Social media collective",
+      
+      // Villans
+      "Joker": "Batman's nemesis",
+      "Uma": "Disney villain",
+      "Thanos": "Marvel villain",
+      "Harely Quinn": "Batman villain",
+      "Bane": "Batman villain",
+      "Green Goblen": "Spiderman villain",
+      "Lex Luther": "Superman villain",
+      "Mysterio": "Spiderman villain",
+      "Prowler": "Spiderman villain",
+      "King Pin": "Spiderman villain",
+      "Omni Man": "Invincible villain",
+      "Loki": "Marvel villain",
+      "Darth Vader": "Star Wars villain",
+      "Voldemort": "Harry Potter villain",
+      "Ghost Face": "Scream villain",
+      "Chucky": "Horror doll villain",
+      "PennyWise": "Horror clown villain"
     };
     
     // Role definitions with enhanced descriptions
@@ -2132,13 +2160,47 @@
       
       // Check imposter win condition
       if (aliveImposters.length >= aliveInnocents.length && aliveImposters.length > 0) {
-        endGame('imposters', 'Imposters outnumber or equal the innocents!');
+        // Check if there's a lawyer who won with the imposters
+        const aliveLawyers = alivePlayers.filter(p => p.role === 'lawyer');
+        let lawyerWon = false;
+        aliveLawyers.forEach(lawyer => {
+          if (lawyer.specialData.client) {
+            const client = gameState.players.find(p => p.id === lawyer.specialData.client);
+            if (client && client.alive && (client.role === 'imposter' || client.role === 'shapeshifter' || 
+                client.role === 'silencer' || client.role === 'hinter' || client.role === 'saboteur')) {
+              lawyerWon = true;
+            }
+          }
+        });
+        
+        if (lawyerWon) {
+          endGame('imposters', 'Imposters win! The lawyer successfully defended their client.');
+        } else {
+          endGame('imposters', 'Imposters outnumber or equal the innocents!');
+        }
         return;
       }
       
       // Check innocent win condition
       if (aliveImposters.length === 0) {
-        endGame('innocents', 'All imposters have been eliminated!');
+        // Check if there's a lawyer who lost with the imposters
+        const lawyers = gameState.players.filter(p => p.role === 'lawyer');
+        let lawyerLost = false;
+        lawyers.forEach(lawyer => {
+          if (lawyer.specialData.client) {
+            const client = gameState.players.find(p => p.id === lawyer.specialData.client);
+            if (client && !client.alive && (client.role === 'imposter' || client.role === 'shapeshifter' || 
+                client.role === 'silencer' || client.role === 'hinter' || client.role === 'saboteur')) {
+              lawyerLost = true;
+            }
+          }
+        });
+        
+        if (lawyerLost) {
+          endGame('innocents', 'All imposters have been eliminated! The lawyer failed to protect their client.');
+        } else {
+          endGame('innocents', 'All imposters have been eliminated!');
+        }
         return;
       }
       
@@ -2415,37 +2477,6 @@
       themeBtn.textContent = currentTheme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode';
       
       showNotification(`Switched to ${currentTheme} mode`, 'info');
-    }
-    
-    // Cheat Function
-    function toggleCheatPanel() {
-      const cheatPanel = document.getElementById('cheatPanel');
-      const cheatInfo = document.getElementById('cheatInfo');
-      
-      if (cheatPanel.style.display === 'none' || !cheatPanel.style.display) {
-        // Show cheat info
-        let infoHTML = `<div style="margin-bottom: 10px;"><strong>🔤 Secret Word:</strong> <span style="color: #4ecdc4; font-weight: bold;">${gameState.currentWord}</span></div>`;
-        infoHTML += `<div style="margin-bottom: 15px;"><strong>📂 Category:</strong> <span style="color: #ff6b6b; font-weight: bold;">${gameState.currentCategory}</span></div>`;
-        infoHTML += '<div style="margin-bottom: 10px; font-weight: bold;">👥 Player Roles:</div>';
-        
-        gameState.players.forEach(player => {
-          const roleData = roles[player.role];
-          const statusIcon = player.alive ? '✅' : '💀';
-          const roleColor = player.role === 'imposter' || player.role === 'shapeshifter' || player.role === 'silencer' ||
-                          player.role === 'hinter' || player.role === 'saboteur' ? '#ff6b6b' : '#4ecdc4';
-          
-          infoHTML += `<div style="margin-bottom: 5px; padding: 5px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-            ${statusIcon} <strong>Player ${player.id}:</strong> 
-            <span style="color: ${roleColor}; font-weight: bold;">${roleData.name}</span>
-          </div>`;
-        });
-        
-        cheatInfo.innerHTML = infoHTML;
-        cheatPanel.style.display = 'block';
-      } else {
-        // Hide cheat info
-        cheatPanel.style.display = 'none';
-      }
     }
     
     // Event Listeners
