@@ -13,7 +13,7 @@
     }
     :root {
       --primary-color: #4c51bf;
-      --secondary-color: #339af0;
+      --secondary-color: #339af0; /* Changed from #667eea to more readable blue */
       --accent-color: #764ba2;
       --success-color: #2ecc71;
       --danger-color: #e74c3c;
@@ -235,90 +235,30 @@
       font-weight: 500;
       backdrop-filter: blur(10px);
     }
-    /* Role Options - Updated for multiple roles */
     .role-options {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
       margin-top: 20px;
     }
-    .role-option {
+    .role-checkbox {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      align-items: center;
+      gap: 10px;
       padding: 15px;
       background: var(--glass-bg);
       border-radius: 12px;
       border: 1px solid var(--glass-border);
+      cursor: pointer;
       transition: all 0.3s ease;
     }
-    .role-option:hover {
+    .role-checkbox:hover {
       background: var(--primary-color);
       transform: translateY(-2px);
     }
-    .role-option-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-    }
-    .role-option-description {
-      font-size: 0.85rem;
-      opacity: 0.8;
-      margin-bottom: 8px;
-    }
-    .role-option-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .role-quantity {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .role-quantity button {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: none;
-      background: var(--secondary-color);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .role-quantity button:hover {
-      background: var(--primary-color);
-      transform: scale(1.1);
-    }
-    .role-quantity input {
-      width: 40px;
-      text-align: center;
-      border-radius: 6px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      color: inherit;
-      font-weight: 600;
-    }
-    .role-team-indicator {
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .team-innocent {
-      background: rgba(46, 204, 113, 0.2);
-      color: var(--success-color);
-    }
-    .team-imposter {
-      background: rgba(231, 76, 60, 0.2);
-      color: var(--danger-color);
-    }
-    .team-neutral {
-      background: rgba(243, 156, 18, 0.2);
-      color: var(--warning-color);
+    .role-checkbox input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
     }
     .start-game-btn {
       padding: 20px 60px;
@@ -432,7 +372,7 @@
     .role-name.lawyer { color: #daa520; }
     .role-name.silencer { color: #ff0000; }
     .role-name.host { color: #583b31; }
-    /* Special Actions - Updated for player grid */
+    /* Special Actions */
     .special-actions {
       background: var(--glass-bg);
       border-radius: 20px;
@@ -441,71 +381,36 @@
       border: 1px solid var(--glass-border);
       margin: 20px 0;
     }
-    .action-header {
-      text-align: center;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .player-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .player-action-btn {
-      padding: 15px 10px;
+    .action-btn {
+      padding: 15px 25px;
       border: none;
       border-radius: 12px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 80px;
-      position: relative;
+      min-width: 150px;
     }
-    .player-action-btn.primary { background: var(--primary-color); color: white; }
-    .player-action-btn.success { background: var(--success-color); color: white; }
-    .player-action-btn.danger { background: var(--danger-color); color: white; }
-    .player-action-btn.warning { background: var(--warning-color); color: white; }
-    .player-action-btn.purple { background: var(--purple-color); color: white; }
-    .player-action-btn.teal { background: var(--teal-color); color: white; }
-    .player-action-btn:hover:not(:disabled) {
+    .action-btn.primary { background: var(--primary-color); color: white; }
+    .action-btn.success { background: var(--success-color); color: white; }
+    .action-btn.danger { background: var(--danger-color); color: white; }
+    .action-btn.warning { background: var(--warning-color); color: white; }
+    .action-btn.purple { background: var(--purple-color); color: white; }
+    .action-btn.teal { background: var(--teal-color); color: white; }
+    .action-btn:hover:not(:disabled) {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
-    .player-action-btn:disabled {
+    .action-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
-    }
-    .player-action-btn .player-number {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-    .player-action-btn .player-status {
-      font-size: 0.75rem;
-      opacity: 0.8;
-    }
-    .player-action-btn.used::after {
-      content: '✓';
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: var(--success-color);
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
     }
     /* Voting System */
     .voting-container {
@@ -615,38 +520,38 @@
       background: var(--dark-bg);
       display: none;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: flex-start; /* Changed from center to flex-start */
       align-items: center;
       z-index: 3000;
       text-align: center;
-      overflow-y: auto;
-      padding: 20px 0;
+      overflow-y: auto; /* Enable vertical scrolling */
+      padding: 20px 0; /* Add padding for better spacing */
     }
     .win-content {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
       border-radius: 25px;
-      padding: 40px;
+      padding: 40px; /* Reduced padding to fit more content */
       max-width: 800px;
       width: 90%;
-      margin: 20px 0;
-      min-height: auto;
+      margin: 20px 0; /* Add margin for spacing */
+      min-height: auto; /* Allow content to determine height */
     }
     .win-title {
-      font-size: 3.5rem;
+      font-size: 3.5rem; /* Slightly smaller to fit better */
       font-weight: 800;
-      margin-bottom: 20px;
+      margin-bottom: 20px; /* Reduced margin */
       text-transform: uppercase;
       letter-spacing: 3px;
     }
     .role-reveal-section {
-      margin: 20px 0;
+      margin: 20px 0; /* Reduced margin */
       padding: 20px;
       background: var(--glass-bg);
       border-radius: 15px;
       border: 1px solid var(--glass-border);
-      max-height: none;
+      max-height: none; /* Remove height restrictions */
     }
     .role-reveal-title {
       font-size: 2rem;
@@ -695,10 +600,8 @@
       .start-game-btn { padding: 15px 40px; font-size: 1.5rem; }
       .pass-device-content { padding: 40px 20px; }
       .pass-device-title { font-size: 2rem; }
-      .win-title { font-size: 2.5rem; }
-      .win-content { padding: 30px 20px; }
-      .role-options { grid-template-columns: 1fr; }
-      .player-grid { grid-template-columns: repeat(3, 1fr); }
+      .win-title { font-size: 2.5rem; } /* Smaller on mobile */
+      .win-content { padding: 30px 20px; } /* Reduced padding on mobile */
     }
     /* Hidden elements */
     .hidden { display: none !important; }
@@ -743,62 +646,6 @@
     .sound-visualizer.active {
       opacity: 1;
       animation: pulse 0.5s ease;
-    }
-    /* Improved Difficulty Buttons */
-    .difficulty-buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      margin-top: 10px;
-    }
-    .difficulty-btn {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-    .difficulty-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-    .difficulty-btn:hover::before {
-      transform: translateX(0);
-    }
-    .easy-btn {
-      background: linear-gradient(45deg, #56ab2f, #a8e063);
-      color: white;
-    }
-    .easy-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(86, 171, 47, 0.4);
-    }
-    .hard-btn {
-      background: linear-gradient(45deg, #e53935, #e35d5b);
-      color: white;
-    }
-    .hard-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
-    }
-    .difficulty-label {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -866,7 +713,7 @@
         <div class="setup-grid">
           <div class="setup-item">
             <label for="playerCount">Number of Players:</label>
-            <select id="playerCount" onchange="updatePlayerCountOptions()">
+            <select id="playerCount">
               <option value="4">4 Players</option>
               <option value="5" selected>5 Players</option>
               <option value="6">6 Players</option>
@@ -879,7 +726,7 @@
           </div>
           <div class="setup-item">
             <label for="imposterCount">Number of Imposters:</label>
-            <select id="imposterCount" onchange="updateSetupDisplay()">
+            <select id="imposterCount">
               <option value="1" selected>1 Imposter</option>
               <option value="2">2 Imposters</option>
               <option value="3">3 Imposters</option>
@@ -905,10 +752,10 @@
             </select>
           </div>
           <div class="setup-item">
-            <div class="difficulty-label">Choose Difficulty:</div>
-            <div class="difficulty-buttons">
-              <button class="difficulty-btn easy-btn" onclick="setDifficulty('easy')">🌱 Easy</button>
-              <button class="difficulty-btn hard-btn" onclick="setDifficulty('hard')">🔥 Gen Z</button>
+            <label>Choose Difficulty:</label>
+            <div style="display: flex; gap: 10px;">
+              <button onclick="setDifficulty('easy')" class="action-btn success">Easy</button>
+              <button onclick="setDifficulty('hard')" class="action-btn danger">Gen Z</button>
             </div>
           </div>
         </div>
@@ -916,8 +763,67 @@
       
       <!-- Roles Tab -->
       <div id="rolesTab" class="tab-content">
-        <div class="role-options" id="roleOptions">
-          <!-- Roles will be dynamically added here -->
+        <div class="role-options">
+          <div class="role-checkbox">
+            <input type="checkbox" id="mayorRole">
+            <label for="mayorRole">👑 Mayor (Vote x2)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="jesterRole">
+            <label for="jesterRole">🃏 Jester (Wins if voted out)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="observerRole">
+            <label for="observerRole">👁️ Observer (See one role)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="protectorRole">
+            <label for="protectorRole">🛡️ Protector (Protect player)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="detectiveRole">
+            <label for="detectiveRole">🔍 Detective (Investigate)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="medicRole">
+            <label for="medicRole">❌ Medic (Coming soon)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="shapeshifterRole">
+            <label for="shapeshifterRole">❌ Shapeshifter (Coming soon)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="bodyguardRole">
+            <label for="bodyguardRole">🛡️ Bodyguard (Shield target)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="psychicRole">
+            <label for="psychicRole">❌ Psychic (Coming soon)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="executionerRole">
+            <label for="executionerRole">⚖️ Executioner (Target specific player) IMPOSTER TEAM</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="lawyerRole">
+            <label for="lawyerRole">⚖️ Lawyer (Defend imposter client) IMPOSTER TEAM</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="silencerRole">
+            <label for="silencerRole">🤐 Silencer (Silence one player) IMPOSTER TEAM</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="hostRole">
+            <label for="hostRole">🎤 Host (Choose discussion order)</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="hinterRole">
+            <label for="hinterRole">🔍 Hinter (Knows a hint for the word) IMPOSTER TEAM</label>
+          </div>
+          <div class="role-checkbox">
+            <input type="checkbox" id="saboteurRole">
+            <label for="saboteurRole">🛠️ Saboteur (Block player's ability) IMPOSTER TEAM</label>
+          </div>
         </div>
       </div>
       
@@ -943,8 +849,7 @@
       </div>
       <!-- Special Actions -->
       <div id="specialActions" class="special-actions hidden">
-        <h3 class="action-header" id="actionHeader">Special Actions Available</h3>
-        <div class="player-grid" id="playerGrid"></div>
+        <h3 style="text-align: center; margin-bottom: 20px;">Special Actions Available</h3>
         <div class="action-buttons" id="actionButtons"></div>
       </div>
       <!-- Voting Container -->
@@ -992,7 +897,7 @@
         imposterCount: 1,
         discussionTime: 3,
         gameMode: 'classic',
-        enabledRoles: {}
+        enabledRoles: []
       },
       eliminatedPlayers: [],
       protectedPlayers: [],
@@ -1027,7 +932,7 @@
       Instruments: ["Guitar", "Violin", "Harmonica", "Piano", "Ukulele", "Cowbell", "Didgeridoo", "The Triangle", "Microphone", "Flute", "Kick Drum", "Accordion"],
       Countries: ["Slovenia", "Moldova", "Bhutan", "New Zealand", "USA", "Argentina", "Mexico", "Brazil", "Comoros", "France", "Germany", "Canada"],
       "Famous People": ["Michael Jackson", "Timothee Chalamet", "Ariana Grande", "Lebron James", "Chris Pratt", "Jim Carrey", "Chris Rock", "Elon Musk", "The Rock", "John Cena", "Martin Luther King", "Kanye West"],
-      "Video Games": ["Fortnite", "Minecraft", "Call of Duty", "Tertis", "Among Us", "Halo", "Fall Guys", "Fifa", "NBA 2K", "Pac-Man"],
+      "Video Games": ["Fortnite", "Minecraft", "Call of Duty", "Tertis", "Among Us", "Halo", "Fall Guys", "Fifa", "NBA 2K", "Pac-Man", "Battle Front"],
       Athletes: ["Luka Doncic", "Steph Curry", "Klay Thompson", "Tiger Woods", "Ronaldo", "Kawhi Leonard", "Messi", "Travis Kelce", "Kylian Mbappe", "Caitlin Clark", "Angel Reese", "Rory Mcilroy"],
       Movies: ["Toy Story", "Shawshank Redemption", "Daddy's Home", "End Game", "Titanic", "Incredibles", "Charlotte's Web", "Iron Man", "Frozen", "Fast and Furious", "Inside Out", "BIG"],
       Foods: ["Spaghetti Bolognese", "Taco", "Risotto", "Steak", "Jelly", "Jollof Rice", "Egg Fried Rice", "Sushi", "Pork", "Ribs", "Ratatouille", "Chicken Noodle Soup", "Massaman Beef Curry"],
@@ -1038,7 +943,7 @@
     // Default to easy
     let currentWordCategories = easyWordCategories;
     
-    // Word hints
+    // Word hints - less obvious and more broad
     const wordHints = {
       // Animals
       "Whale": "Large marine mammal",
@@ -1345,7 +1250,7 @@
       jester: {
         name: 'Jester',
         description: 'Win by getting yourself voted out!',
-        team: 'neutral',
+        team: 'jester',
         actions: []
       },
       observer: {
@@ -1370,7 +1275,7 @@
         name: 'Medic',
         description: 'Bring back one eliminated player per game.',
         team: 'innocent',
-        actions: ['heal']
+        actions: ['']
       },
       shapeshifter: {
         name: 'Shapeshifter',
@@ -1393,13 +1298,13 @@
       executioner: {
         name: 'Executioner',
         description: 'Win by eliminating your assigned target.',
-        team: 'neutral',
+        team: 'executioner',
         actions: []
       },
       lawyer: {
         name: 'Lawyer',
         description: 'Defend your imposter client. Win if they survive.',
-        team: 'neutral',
+        team: 'lawyer',
         actions: ['defend']
       },
       silencer: {
@@ -1432,7 +1337,6 @@
     function initializeGame() {
       updatePlayerCountOptions();
       updateSetupDisplay();
-      initializeRoleOptions();
       resetGameState();
     }
     
@@ -1443,7 +1347,7 @@
         imposterCount: gameState.gameSettings.imposterCount,
         discussionTime: gameState.gameSettings.discussionTime,
         gameMode: gameState.gameSettings.gameMode,
-        enabledRoles: {...gameState.gameSettings.enabledRoles}
+        enabledRoles: [...gameState.gameSettings.enabledRoles]
       };
       
       gameState = {
@@ -1477,8 +1381,37 @@
       document.getElementById('discussionTime').value = savedSettings.discussionTime;
       document.getElementById('gameMode').value = savedSettings.gameMode;
       
-      // Update role quantities
-      updateRoleQuantities(savedSettings.enabledRoles);
+      // Update role checkboxes
+      const roleCheckboxes = {
+        mayorRole: 'mayor',
+        jesterRole: 'jester',
+        observerRole: 'observer',
+        protectorRole: 'protector',
+        detectiveRole: 'detective',
+        medicRole: 'medic',
+        shapeshifterRole: 'shapeshifter',
+        bodyguardRole: 'bodyguard',
+        psychicRole: 'psychic',
+        executionerRole: 'executioner',
+        lawyerRole: 'lawyer',
+        silencerRole: 'silencer',
+        hostRole: 'host',
+        hinterRole: 'hinter',
+        saboteurRole: 'saboteur'
+      };
+      
+      // Uncheck all checkboxes first
+      Object.keys(roleCheckboxes).forEach(checkboxId => {
+        document.getElementById(checkboxId).checked = false;
+      });
+      
+      // Check the ones that were enabled
+      savedSettings.enabledRoles.forEach(roleName => {
+        const checkboxId = Object.keys(roleCheckboxes).find(id => roleCheckboxes[id] === roleName);
+        if (checkboxId) {
+          document.getElementById(checkboxId).checked = true;
+        }
+      });
       
       // Clear any running timers
       if (gameState.timer) {
@@ -1492,7 +1425,6 @@
       // Reset player status display
       document.getElementById('playersStatus').innerHTML = '';
       document.getElementById('votingGrid').innerHTML = '';
-      document.getElementById('playerGrid').innerHTML = '';
       document.getElementById('actionButtons').innerHTML = '';
       
       showNotification('Game reset! Ready for a new game.', 'success');
@@ -1501,10 +1433,10 @@
     function setDifficulty(level) {
       if (level === 'easy') {
         currentWordCategories = easyWordCategories;
-        showNotification('Easy mode selected. Words are simpler and more common.', 'success');
+        showNotification('Easy mode selected.', 'success');
       } else if (level === 'hard') {
         currentWordCategories = hardWordCategories;
-        showNotification('Gen Z mode selected. Words are more challenging and obscure!', 'danger');
+        showNotification('Hard mode selected.', 'danger');
       }
     }
     
@@ -1549,141 +1481,33 @@
       }
     }
     
-    // Initialize role options in the setup screen
-    function initializeRoleOptions() {
-      const roleOptionsContainer = document.getElementById('roleOptions');
-      roleOptionsContainer.innerHTML = '';
-      
-      Object.entries(roles).forEach(([roleKey, roleData]) => {
-        if (roleKey === 'innocent' || roleKey === 'imposter') return; // Skip base roles
-        
-        const roleOption = document.createElement('div');
-        roleOption.className = 'role-option';
-        roleOption.dataset.role = roleKey;
-        
-        const roleHeader = document.createElement('div');
-        roleHeader.className = 'role-option-header';
-        
-        const roleIcon = document.createElement('span');
-        roleIcon.textContent = getRoleIcon(roleKey);
-        
-        const roleName = document.createElement('span');
-        roleName.textContent = roleData.name;
-        
-        const teamIndicator = document.createElement('span');
-        teamIndicator.className = `role-team-indicator team-${roleData.team}`;
-        teamIndicator.textContent = roleData.team;
-        
-        roleHeader.appendChild(roleIcon);
-        roleHeader.appendChild(roleName);
-        roleHeader.appendChild(teamIndicator);
-        
-        const roleDescription = document.createElement('div');
-        roleDescription.className = 'role-option-description';
-        roleDescription.textContent = roleData.description;
-        
-        const roleControls = document.createElement('div');
-        roleControls.className = 'role-option-controls';
-        
-        const roleQuantity = document.createElement('div');
-        roleQuantity.className = 'role-quantity';
-        
-        const decreaseBtn = document.createElement('button');
-        decreaseBtn.textContent = '-';
-        decreaseBtn.onclick = () => decreaseRoleQuantity(roleKey);
-        
-        const quantityInput = document.createElement('input');
-        quantityInput.type = 'number';
-        quantityInput.id = `${roleKey}Quantity`;
-        quantityInput.min = '0';
-        quantityInput.max = '5';
-        quantityInput.value = '0';
-        quantityInput.readOnly = true;
-        
-        const increaseBtn = document.createElement('button');
-        increaseBtn.textContent = '+';
-        increaseBtn.onclick = () => increaseRoleQuantity(roleKey);
-        
-        roleQuantity.appendChild(decreaseBtn);
-        roleQuantity.appendChild(quantityInput);
-        roleQuantity.appendChild(increaseBtn);
-        
-        roleControls.appendChild(roleQuantity);
-        
-        roleOption.appendChild(roleHeader);
-        roleOption.appendChild(roleDescription);
-        roleOption.appendChild(roleControls);
-        
-        roleOptionsContainer.appendChild(roleOption);
-      });
-    }
-    
-    function getRoleIcon(roleKey) {
-      const roleIcons = {
-        mayor: '👑',
-        jester: '🃏',
-        observer: '👁️',
-        protector: '🛡️',
-        detective: '🔍',
-        medic: '❌',
-        shapeshifter: '❌',
-        bodyguard: '🛡️',
-        psychic: '❌',
-        executioner: '⚖️',
-        lawyer: '⚖️',
-        silencer: '🤐',
-        host: '🎤',
-        hinter: '🔍',
-        saboteur: '🛠️'
+    function getEnabledRoles() {
+      const enabledRoles = [];
+      const roleCheckboxes = {
+        mayorRole: 'mayor',
+        jesterRole: 'jester',
+        observerRole: 'observer',
+        protectorRole: 'protector',
+        detectiveRole: 'detective',
+        medicRole: 'medic',
+        shapeshifterRole: 'shapeshifter',
+        bodyguardRole: 'bodyguard',
+        psychicRole: 'psychic',
+        executionerRole: 'executioner',
+        lawyerRole: 'lawyer',
+        silencerRole: 'silencer',
+        hostRole: 'host',
+        hinterRole: 'hinter',
+        saboteurRole: 'saboteur'
       };
       
-      return roleIcons[roleKey] || '❓';
-    }
-    
-    function increaseRoleQuantity(roleKey) {
-      const input = document.getElementById(`${roleKey}Quantity`);
-      const currentValue = parseInt(input.value);
-      const maxValue = parseInt(input.max);
-      
-      if (currentValue < maxValue) {
-        input.value = currentValue + 1;
-        updateEnabledRoles();
-      }
-    }
-    
-    function decreaseRoleQuantity(roleKey) {
-      const input = document.getElementById(`${roleKey}Quantity`);
-      const currentValue = parseInt(input.value);
-      
-      if (currentValue > 0) {
-        input.value = currentValue - 1;
-        updateEnabledRoles();
-      }
-    }
-    
-    function updateEnabledRoles() {
-      gameState.gameSettings.enabledRoles = {};
-      
-      Object.entries(roles).forEach(([roleKey, roleData]) => {
-        if (roleKey === 'innocent' || roleKey === 'imposter') return;
-        
-        const quantityInput = document.getElementById(`${roleKey}Quantity`);
-        if (quantityInput) {
-          const quantity = parseInt(quantityInput.value);
-          if (quantity > 0) {
-            gameState.gameSettings.enabledRoles[roleKey] = quantity;
-          }
+      Object.entries(roleCheckboxes).forEach(([checkboxId, roleName]) => {
+        if (document.getElementById(checkboxId).checked) {
+          enabledRoles.push(roleName);
         }
       });
-    }
-    
-    function updateRoleQuantities(enabledRoles) {
-      Object.entries(enabledRoles).forEach(([roleKey, quantity]) => {
-        const quantityInput = document.getElementById(`${roleKey}Quantity`);
-        if (quantityInput) {
-          quantityInput.value = quantity;
-        }
-      });
+      
+      return enabledRoles;
     }
     
     // Tab switching function
@@ -1716,15 +1540,12 @@
         }
       });
       
-      // Update enabled roles from UI
-      updateEnabledRoles();
-      
       gameState.gameSettings = {
         playerCount: parseInt(document.getElementById('playerCount').value),
         imposterCount: parseInt(document.getElementById('imposterCount').value),
         discussionTime: parseInt(document.getElementById('discussionTime').value),
         gameMode: document.getElementById('gameMode').value,
-        enabledRoles: gameState.gameSettings.enabledRoles
+        enabledRoles: getEnabledRoles()
       };
       
       if (gameState.gameSettings.playerCount < 4) {
@@ -1788,47 +1609,22 @@
       
       // Assign special roles
       let specialRoleIndex = gameState.gameSettings.imposterCount;
+      const availableRoles = [...gameState.gameSettings.enabledRoles];
+      shuffleArray(availableRoles);
       
-      // First, assign imposter team roles
-      const imposterRoles = Object.entries(gameState.gameSettings.enabledRoles)
-        .filter(([roleKey, quantity]) => {
-          return roles[roleKey].team === 'imposter' && quantity > 0;
-        });
-      
-      imposterRoles.forEach(([roleKey, quantity]) => {
-        for (let i = 0; i < quantity; i++) {
-          if (specialRoleIndex < gameState.gameSettings.playerCount) {
-            gameState.players[playerIndices[specialRoleIndex]].role = roleKey;
-            specialRoleIndex++;
-          }
-        }
-      });
-      
-      // Then assign innocent team roles
-      const innocentRoles = Object.entries(gameState.gameSettings.enabledRoles)
-        .filter(([roleKey, quantity]) => {
-          return roles[roleKey].team === 'innocent' && quantity > 0;
-        });
-      
-      innocentRoles.forEach(([roleKey, quantity]) => {
-        for (let i = 0; i < quantity; i++) {
-          if (specialRoleIndex < gameState.gameSettings.playerCount) {
-            gameState.players[playerIndices[specialRoleIndex]].role = roleKey;
-            specialRoleIndex++;
-          }
-        }
-      });
-      
-      // Finally assign neutral roles
-      const neutralRoles = Object.entries(gameState.gameSettings.enabledRoles)
-        .filter(([roleKey, quantity]) => {
-          return roles[roleKey].team === 'neutral' && quantity > 0;
-        });
-      
-      neutralRoles.forEach(([roleKey, quantity]) => {
-        for (let i = 0; i < quantity; i++) {
-          if (specialRoleIndex < gameState.gameSettings.playerCount) {
-            gameState.players[playerIndices[specialRoleIndex]].role = roleKey;
+      availableRoles.forEach(roleName => {
+        if (specialRoleIndex < gameState.gameSettings.playerCount) {
+          // Some roles should be assigned to imposters
+          if (roleName === 'shapeshifter' || roleName === 'silencer' || 
+              roleName === 'hinter' || roleName === 'saboteur') {
+            // Find an imposter to assign this role to
+            const imposterIndex = gameState.players.findIndex(p => p.role === 'imposter' && !roles[p.role].actions.length);
+            if (imposterIndex !== -1) {
+              gameState.players[imposterIndex].role = roleName;
+            }
+          } else {
+            // Assign to innocent players
+            gameState.players[playerIndices[specialRoleIndex]].role = roleName;
             specialRoleIndex++;
           }
         }
@@ -1851,9 +1647,10 @@
             }
             break;
           case 'lawyer':
-            // Assign a client that is on the imposter team
+            // Assign a client that is either an imposter, silencer, hinter, or saboteur
             const imposterClients = gameState.players.filter(p =>
-              roles[p.role].team === 'imposter'
+              p.role === 'imposter' || p.role === 'silencer' || 
+              p.role === 'hinter' || p.role === 'saboteur'
             );
             if (imposterClients.length > 0) {
               player.specialData.client = imposterClients[Math.floor(Math.random() * imposterClients.length)].id;
@@ -1933,7 +1730,8 @@
       
       document.getElementById('categoryDisplay').textContent = gameState.currentCategory.toUpperCase();
       
-      if (roles[player.role].team === 'imposter') {
+      if (player.role === 'imposter' || player.role === 'shapeshifter' || player.role === 'silencer' ||
+          player.role === 'hinter' || player.role === 'saboteur') {
         document.getElementById('wordDisplay').textContent = '???';
         document.getElementById('wordDisplay').style.color = 'var(--danger-color)';
       } else {
@@ -1987,111 +1785,17 @@
     }
     
     function setupSpecialActions(player, actions) {
-      const playerGrid = document.getElementById('playerGrid');
-      const actionButtons = document.getElementById('actionButtons');
-      playerGrid.innerHTML = '';
-      actionButtons.innerHTML = '';
+      const actionsContainer = document.getElementById('actionButtons');
+      actionsContainer.innerHTML = '';
       
-      // Set header text
-      document.getElementById('actionHeader').textContent = `${roles[player.role].name} Special Actions`;
-      
-      // Create player buttons for each action
       actions.forEach(action => {
-        if (action === 'protect' || action === 'shield' || action === 'moderateDiscussion') {
-          // These actions need a player grid
-          createPlayerActionGrid(player, action);
-        } else {
-          // Other actions use regular buttons
-          const button = createActionButton(action, player);
-          if (button) actionButtons.appendChild(button);
-        }
+        const button = createActionButton(action, player);
+        if (button && player.role !== 'medic') actionsContainer.appendChild(button);
       });
       
-      if (playerGrid.children.length > 0 || actionButtons.children.length > 0) {
+      if (actionsContainer.children.length > 0) {
         document.getElementById('specialActions').classList.remove('hidden');
-      } else {
-        document.getElementById('specialActions').classList.add('hidden');
       }
-    }
-    
-    function createPlayerActionGrid(player, action) {
-      const playerGrid = document.getElementById('playerGrid');
-      
-      gameState.players.forEach(targetPlayer => {
-        if (!targetPlayer.alive) return; // Skip dead players
-        
-        const playerBtn = document.createElement('button');
-        playerBtn.className = 'player-action-btn';
-        
-        // Set button style based on action
-        switch (action) {
-          case 'protect':
-            playerBtn.className += ' success';
-            playerBtn.innerHTML = `
-              <span class="player-number">P${targetPlayer.id}</span>
-              <span class="player-status">Protect</span>
-            `;
-            break;
-          case 'shield':
-            playerBtn.className += ' primary';
-            playerBtn.innerHTML = `
-              <span class="player-number">P${targetPlayer.id}</span>
-              <span class="player-status">Shield</span>
-            `;
-            break;
-          case 'moderateDiscussion':
-            playerBtn.className += ' warning';
-            playerBtn.innerHTML = `
-              <span class="player-number">P${targetPlayer.id}</span>
-              <span class="player-status">Speak First</span>
-            `;
-            break;
-        }
-        
-        // Check if action was already used on this player
-        const actionKey = `${player.id}_${action}_${targetPlayer.id}`;
-        if (gameState.specialActions[actionKey]) {
-          playerBtn.classList.add('used');
-          playerBtn.disabled = true;
-        }
-        
-        playerBtn.onclick = () => executePlayerAction(player, targetPlayer, action);
-        
-        playerGrid.appendChild(playerBtn);
-      });
-    }
-    
-    function executePlayerAction(player, targetPlayer, action) {
-      const actionKey = `${player.id}_${action}_${targetPlayer.id}`;
-      
-      if (gameState.specialActions[actionKey]) {
-        showNotification('This action has already been used!', 'warning');
-        return;
-      }
-      
-      switch (action) {
-        case 'protect':
-          targetPlayer.protected = true;
-          gameState.protectedPlayers.push(targetPlayer.id);
-          showNotification(`Player ${targetPlayer.id} is now protected!`, 'success');
-          break;
-        case 'shield':
-          targetPlayer.shielded = true;
-          showNotification(`Player ${targetPlayer.id} is now shielded!`, 'success');
-          break;
-        case 'moderateDiscussion':
-          gameState.discussionOrder = gameState.discussionOrder || [];
-          gameState.discussionOrder.push(targetPlayer.id);
-          showNotification(`Player ${targetPlayer.id} will speak first!`, 'info');
-          break;
-      }
-      
-      // Mark action as used
-      gameState.specialActions[actionKey] = true;
-      
-      // Update UI
-      setupSpecialActions(player, roles[player.role].actions);
-      updatePlayerStatus();
     }
     
     function createActionButton(action, player) {
@@ -2103,6 +1807,11 @@
           button.textContent = '👁️ Observe Player';
           button.className += ' purple';
           button.onclick = () => useObserve(player);
+          break;
+        case 'protect':
+          button.textContent = '🛡️ Protect Player';
+          button.className += ' success';
+          button.onclick = () => useProtect(player);
           break;
         case 'investigate':
           button.textContent = '🔍 Investigate';
@@ -2156,6 +1865,25 @@
       setupSpecialActions(player, roles[player.role].actions);
     }
     
+    function useProtect(player) {
+      if (gameState.specialActions[`${player.id}_protect`]) return;
+      
+      const targetId = prompt('Enter player number to protect (1-' + gameState.gameSettings.playerCount + '):');
+      const targetPlayer = gameState.players.find(p => p.id == targetId);
+      
+      if (!targetPlayer) {
+        showNotification('Invalid target!', 'error');
+        return;
+      }
+      
+      targetPlayer.protected = true;
+      gameState.protectedPlayers.push(targetPlayer.id);
+      showNotification(`Player ${targetId} is now protected!`, 'success');
+      
+      gameState.specialActions[`${player.id}_protect`] = true;
+      setupSpecialActions(player, roles[player.role].actions);
+    }
+    
     function useInvestigate(player) {
       if (gameState.specialActions[`${player.id}_investigate`]) return;
       
@@ -2167,12 +1895,11 @@
         return;
       }
       
-      let isSuspicious = false;
-      
-      // Check if target is on imposter team
-      if (roles[targetPlayer.role].team === 'imposter') {
-        isSuspicious = true;
-      }
+      const isSuspicious = targetPlayer.role === 'imposter' || 
+                          targetPlayer.role === 'shapeshifter' || 
+                          targetPlayer.role === 'silencer' ||
+                          targetPlayer.role === 'hinter' ||
+                          targetPlayer.role === 'saboteur';
       
       const result = isSuspicious ? 'SUSPICIOUS' : 'NOT SUSPICIOUS';
       showNotification(`Player ${targetId} appears: ${result}`, 'warning');
@@ -2378,12 +2105,11 @@
         showNotification('Vote skipped! No one was eliminated.', 'info');
       } else {
         const votedPlayer = gameState.players.find(p => p.id == gameState.selectedVote);
-        if (votedPlayer && !votedPlayer.protected && !votedPlayer.shielded) {
+        if (votedPlayer && !votedPlayer.protected) {
           eliminatePlayer(votedPlayer.id);
-        } else if (votedPlayer && (votedPlayer.protected || votedPlayer.shielded)) {
-          showNotification(`Player ${votedPlayer.id} was protected/shielded and cannot be eliminated!`, 'warning');
-          votedPlayer.protected = false;
-          votedPlayer.shielded = false;
+        } else if (votedPlayer && votedPlayer.protected) {
+          showNotification(`Player ${votedPlayer.id} was protected and cannot be eliminated!`, 'warning');
+          votedPlayer.protected = false; // Remove protection after use
         }
       }
       
@@ -2395,7 +2121,6 @@
         player.protected = false;
         player.silenced = false;
         player.sabotaged = false;
-        player.shielded = false;
       });
       
       checkWinConditions();
@@ -2415,10 +2140,13 @@
     function checkWinConditions() {
       const alivePlayers = gameState.players.filter(p => p.alive);
       const aliveImposters = alivePlayers.filter(p => 
-        roles[p.role].team === 'imposter'
+        p.role === 'imposter' || p.role === 'shapeshifter' || p.role === 'silencer' ||
+        p.role === 'hinter' || p.role === 'saboteur'
       );
       const aliveInnocents = alivePlayers.filter(p => 
-        roles[p.role].team === 'innocent'
+        p.role === 'innocent' || p.role === 'mayor' || p.role === 'observer' || 
+        p.role === 'protector' || p.role === 'detective' || p.role === 'medic' ||
+        p.role === 'bodyguard' || p.role === 'psychic' || p.role === 'host'
       );
       
       // Check if jester won (was eliminated)
@@ -2438,7 +2166,8 @@
         aliveLawyers.forEach(lawyer => {
           if (lawyer.specialData.client) {
             const client = gameState.players.find(p => p.id === lawyer.specialData.client);
-            if (client && client.alive && roles[client.role].team === 'imposter') {
+            if (client && client.alive && (client.role === 'imposter' || client.role === 'shapeshifter' || 
+                client.role === 'silencer' || client.role === 'hinter' || client.role === 'saboteur')) {
               lawyerWon = true;
             }
           }
@@ -2460,7 +2189,8 @@
         lawyers.forEach(lawyer => {
           if (lawyer.specialData.client) {
             const client = gameState.players.find(p => p.id === lawyer.specialData.client);
-            if (client && !client.alive && roles[client.role].team === 'imposter') {
+            if (client && !client.alive && (client.role === 'imposter' || client.role === 'shapeshifter' || 
+                client.role === 'silencer' || client.role === 'hinter' || client.role === 'saboteur')) {
               lawyerLost = true;
             }
           }
@@ -2535,7 +2265,8 @@
         const roleItem = document.createElement('div');
         roleItem.className = 'player-role-item';
         
-        if (roles[player.role].team === 'imposter') {
+        if (player.role === 'imposter' || player.role === 'shapeshifter' || player.role === 'silencer' ||
+            player.role === 'hinter' || player.role === 'saboteur') {
           roleItem.classList.add('imposter');
         } else {
           roleItem.classList.add('innocent');
@@ -2626,7 +2357,6 @@
         if (player.protected) statusText += ' • Protected';
         if (player.silenced) statusText += ' • Silenced';
         if (player.sabotaged) statusText += ' • Sabotaged';
-        if (player.shielded) statusText += ' • Shielded';
         
         playerStatus.textContent = statusText;
         
@@ -2657,7 +2387,7 @@
         imposterCount: 1,
         discussionTime: 3,
         gameMode: 'classic',
-        enabledRoles: {}
+        enabledRoles: []
       };
       
       // Reset form elements to default values
@@ -2666,14 +2396,10 @@
       document.getElementById('discussionTime').value = '3';
       document.getElementById('gameMode').value = 'classic';
       
-      // Reset role quantities to 0
-      Object.keys(roles).forEach(roleKey => {
-        if (roleKey === 'innocent' || roleKey === 'imposter') return;
-        
-        const quantityInput = document.getElementById(`${roleKey}Quantity`);
-        if (quantityInput) {
-          quantityInput.value = '0';
-        }
+      // Uncheck all role checkboxes
+      const checkboxes = document.querySelectorAll('.role-checkbox input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
       });
       
       // Update the setup display
